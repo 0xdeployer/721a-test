@@ -9,7 +9,12 @@ contract Test721 is ERC721A {
         _mint(msg.sender, quantity);
     }
 
+    error ContractNotOwner();
+
     function transferFromContract(uint tokenId) external {
+        if(ownerOf(tokenId) != address(this)) {
+            revert ContractNotOwner();
+        }
         transferFrom(ownerOf(tokenId), msg.sender, tokenId);
     }
 }

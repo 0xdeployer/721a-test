@@ -14,6 +14,8 @@ contract TestsForTest721 is Test {
     function testInternalTransfer() public {
         test721.mint(10);
         test721.transferFrom(address(this), address(test721), 1);
+        address ownerOfToken = test721.ownerOf(1);
+        assertEq(ownerOfToken, address(test721));
         test721.transferFromContract(1);
     }
 }
